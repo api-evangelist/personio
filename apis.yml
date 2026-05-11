@@ -1,0 +1,110 @@
+aid: personio
+name: Personio
+description: >-
+  Personio is a European HR management and recruiting platform serving small
+  and mid-sized businesses with a unified HRIS covering employee records,
+  absence management, time tracking, payroll preparation, performance, and
+  applicant tracking. The platform is headquartered in Munich and is widely
+  adopted across Germany, Austria, Switzerland, the UK, the Netherlands, and
+  Spain. Personio exposes a Public API at api.personio.de that supports
+  Bearer token authentication via Client ID/Secret (v1 token endpoint and v2
+  OAuth 2.0 client credentials flow), with webhooks now available for Person
+  entity events.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Human Resources
+  - HRIS
+  - Recruiting
+  - Applicant Tracking
+  - Absence Management
+  - Time Tracking
+  - Europe HR
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/personio/refs/heads/main/apis.yml
+created: '2026-05-11'
+modified: '2026-05-11'
+specificationVersion: '0.19'
+apis:
+  - aid: personio:public-api-v1
+    name: Personio Public API v1
+    description: >-
+      REST API for managing employees, attendances, absences, projects, and
+      recruiting data in Personio. Authentication uses a Client ID/Secret
+      exchanged for a short-lived Bearer token via POST /v1/auth.
+    humanURL: https://developer.personio.de/reference/authentication
+    baseURL: https://api.personio.de/v1
+    tags:
+      - HRIS
+      - Employees
+      - Absences
+      - Attendances
+      - Recruiting
+    properties:
+      - type: Documentation
+        url: https://developer.personio.de/
+      - type: Authentication
+        url: https://developer.personio.de/reference/authentication
+      - type: Getting Started
+        url: >-
+          https://developer.personio.de/docs/getting-started-with-the-personio-api
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/personio/api-docs/master/personio-auth-api.yaml
+  - aid: personio:public-api-v2
+    name: Personio Public API v2
+    description: >-
+      Next-generation REST API with OAuth 2.0 Client Credentials Grant
+      authentication. Token endpoint POST /v2/auth/token returns access
+      tokens used as Bearer credentials on subsequent calls.
+    humanURL: https://developer.personio.de/reference/post_v2-auth-token
+    baseURL: https://api.personio.de/v2
+    tags:
+      - HRIS
+      - OAuth 2.0
+      - Employees
+    properties:
+      - type: Documentation
+        url: https://developer.personio.de/reference/post_v2-auth-token
+      - type: GitHub
+        url: https://github.com/personio/api-docs
+
+common:
+  - type: Website
+    url: https://www.personio.com
+  - type: Documentation
+    url: https://developer.personio.de/
+  - type: Pricing
+    url: https://www.personio.com/pricing/
+  - type: Sign Up
+    url: https://www.personio.com/contact/
+  - type: GitHub Organization
+    url: https://github.com/personio
+features:
+  - name: Core HRIS
+    description: >-
+      Unified employee master data, organizational charts, custom attributes,
+      and document management across the employee lifecycle.
+  - name: Absence Management
+    description: >-
+      Configurable absence types, accruals, approval workflows, and team
+      calendars with country-specific holiday support.
+  - name: Time Tracking
+    description: >-
+      Manual and project-based time tracking with overtime rules and
+      attestation workflows feeding into payroll preparation.
+  - name: Recruiting and ATS
+    description: >-
+      Career pages, multi-posting job boards, structured interviews, and
+      collaborative hiring decisions.
+  - name: Payroll Preparation
+    description: >-
+      Pre-payroll consolidation of master data, absences, and time entries
+      ready for export to external payroll providers.
+  - name: Webhooks
+    description: >-
+      Subscribe to Person entity webhook events to react to employee
+      changes in real time from external systems.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
