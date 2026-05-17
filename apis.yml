@@ -45,7 +45,7 @@ apis:
         url: https://developer.personio.de/
       - type: Authentication
         url: https://developer.personio.de/reference/authentication
-      - type: Getting Started
+      - type: GettingStarted
         url: >-
           https://developer.personio.de/docs/getting-started-with-the-personio-api
       - type: OpenAPI
@@ -76,9 +76,9 @@ common:
     url: https://developer.personio.de/
   - type: Pricing
     url: https://www.personio.com/pricing/
-  - type: Sign Up
+  - type: SignUp
     url: https://www.personio.com/contact/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/personio
 features:
   - name: Core HRIS
