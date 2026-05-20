@@ -70,6 +70,8 @@ apis:
         url: https://github.com/personio/api-docs
 
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/personio
   - type: Website
     url: https://www.personio.com
   - type: Documentation
