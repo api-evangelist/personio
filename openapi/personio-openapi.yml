@@ -1,0 +1,358 @@
+openapi: 3.1.0
+info:
+  title: Personio Public API v2
+  description: |
+    Next-generation Personio Public API for HR management data including
+    persons, absence periods, projects, and webhooks. Authenticates via OAuth
+    2.0 Client Credentials Grant: exchange a Client ID and Secret at
+    POST /v2/auth/token for a short-lived Bearer access token, then include
+    it in the Authorization header of subsequent calls.
+
+    Only a representative subset of the public v2 surface (persons, absence
+    periods, projects, webhooks) is modeled here. See the API reference
+    linked under externalDocs for the full catalog.
+  version: "1.0.0"
+  contact:
+    name: Personio Developer Hub
+    url: https://developer.personio.de/
+  license:
+    name: Personio Proprietary
+externalDocs:
+  description: Personio Developer Hub
+  url: https://developer.personio.de/
+servers:
+  - url: https://api.personio.de/v2
+    description: Personio Public API v2 production base URL
+tags:
+  - name: Auth
+    description: OAuth 2.0 token exchange.
+  - name: Persons
+    description: Manage person (employee) records.
+  - name: Absence Periods
+    description: Manage absence periods.
+  - name: Projects
+    description: Read project definitions.
+  - name: Webhooks
+    description: Manage event webhook subscriptions.
+security:
+  - bearerAuth: []
+paths:
+  /auth/token:
+    post:
+      tags: [Auth]
+      summary: Obtain an OAuth 2.0 access token
+      description: |
+        Exchange Personio API credentials (Client ID and Client Secret) for a
+        short-lived Bearer access token using the OAuth 2.0 Client Credentials
+        grant.
+      operationId: createAccessToken
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [grant_type, client_id, client_secret]
+              properties:
+                grant_type:
+                  type: string
+                  enum: [client_credentials]
+                client_id:
+                  type: string
+                  description: Personio API client identifier.
+                client_secret:
+                  type: string
+                  description: Personio API client secret.
+                scope:
+                  type: string
+                  description: Space-separated list of requested scopes.
+      responses:
+        "200":
+          description: Access token issued.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  token_type:
+                    type: string
+                    example: Bearer
+                  expires_in:
+                    type: integer
+                  scope:
+                    type: string
+        "401":
+          description: Invalid credentials.
+
+  /persons:
+    get:
+      tags: [Persons]
+      summary: List persons
+      description: Returns a paginated list of persons (employees).
+      operationId: listPersons
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 50
+        - in: query
+          name: cursor
+          schema:
+            type: string
+          description: Opaque pagination cursor.
+      responses:
+        "200":
+          description: A page of persons.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonList"
+        "401":
+          description: Missing or invalid access token.
+    post:
+      tags: [Persons]
+      summary: Create a person
+      description: |
+        Creates a new Person resource and an associated Employment resource.
+      operationId: createPerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonCreate"
+      responses:
+        "201":
+          description: Person created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Person"
+
+  /persons/{person_id}:
+    parameters:
+      - in: path
+        name: person_id
+        required: true
+        schema:
+          type: string
+        description: Personio person identifier.
+    patch:
+      tags: [Persons]
+      summary: Update a person
+      description: Modifies an existing person record.
+      operationId: patchPerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Person updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Person"
+        "404":
+          description: Person not found.
+
+  /absence-periods:
+    get:
+      tags: [Absence Periods]
+      summary: List absence periods
+      description: Returns a paginated, filterable list of absence periods.
+      operationId: listAbsencePeriods
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 50
+        - in: query
+          name: cursor
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A page of absence periods.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/AbsencePeriod"
+    post:
+      tags: [Absence Periods]
+      summary: Create an absence period
+      operationId: createAbsencePeriod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AbsencePeriod"
+      responses:
+        "201":
+          description: Absence period created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AbsencePeriod"
+
+  /projects:
+    get:
+      tags: [Projects]
+      summary: List projects
+      description: Returns the configured projects.
+      operationId: listProjects
+      responses:
+        "200":
+          description: Array of projects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Project"
+
+  /webhooks:
+    post:
+      tags: [Webhooks]
+      summary: Create a webhook subscription
+      description: |
+        Subscribes a callback URL to receive event payloads for selected
+        Person events.
+      operationId: createWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookCreate"
+      responses:
+        "201":
+          description: Webhook created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Webhook"
+
+  /webhooks/{webhook_id}:
+    parameters:
+      - in: path
+        name: webhook_id
+        required: true
+        schema:
+          type: string
+    delete:
+      tags: [Webhooks]
+      summary: Delete a webhook subscription
+      operationId: deleteWebhook
+      responses:
+        "204":
+          description: Webhook deleted.
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        Bearer access token obtained from POST /v2/auth/token using the
+        OAuth 2.0 Client Credentials grant.
+  schemas:
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+    PersonCreate:
+      type: object
+      required: [first_name, last_name, email]
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        employment:
+          type: object
+          description: Associated employment details.
+          additionalProperties: true
+    PersonList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Person"
+        meta:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+    AbsencePeriod:
+      type: object
+      properties:
+        id:
+          type: string
+        person_id:
+          type: string
+        absence_type:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        active:
+          type: boolean
+    WebhookCreate:
+      type: object
+      required: [url, events]
+      properties:
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+    Webhook:
+      allOf:
+        - $ref: "#/components/schemas/WebhookCreate"
+        - type: object
+          properties:
+            id:
+              type: string
