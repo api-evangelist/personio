@@ -82,6 +82,8 @@ common:
     url: https://www.personio.com/contact/
   - type: GitHubOrganization
     url: https://github.com/personio
+  - type: LLMsTxt
+    url: https://developer.personio.de/llms.txt
 features:
   - name: Core HRIS
     description: >-
