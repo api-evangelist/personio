@@ -78,11 +78,11 @@ common:
     url: https://developer.personio.de/
   - type: Pricing
     url: https://www.personio.com/pricing/
-  - type: SignUp
+  - type: Signup
     url: https://www.personio.com/contact/
   - type: GitHubOrganization
     url: https://github.com/personio
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://developer.personio.de/llms.txt
 features:
   - name: Core HRIS
