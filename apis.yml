@@ -70,6 +70,12 @@ apis:
         url: https://github.com/personio/api-docs
 
 common:
+  - type: TrustCenter
+    url: security/personio-trust-center.yml
+  - type: DomainSecurity
+    url: security/personio-domain-security.yml
+  - type: Authentication
+    url: authentication/personio-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/personio
   - type: Website

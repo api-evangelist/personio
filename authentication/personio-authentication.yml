@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/personio-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: |-
+    Bearer access token obtained from POST /v2/auth/token using the
+    OAuth 2.0 Client Credentials grant.
+  sources:
+  - openapi/personio-openapi.yml
