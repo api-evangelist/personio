@@ -1,0 +1,171 @@
+openapi: 3.1.0
+info:
+  title: Personio Public API v2 Absence Periods Persons API
+  description: 'Next-generation Personio Public API for HR management data including
+
+    persons, absence periods, projects, and webhooks. Authenticates via OAuth
+
+    2.0 Client Credentials Grant: exchange a Client ID and Secret at
+
+    POST /v2/auth/token for a short-lived Bearer access token, then include
+
+    it in the Authorization header of subsequent calls.
+
+
+    Only a representative subset of the public v2 surface (persons, absence
+
+    periods, projects, webhooks) is modeled here. See the API reference
+
+    linked under externalDocs for the full catalog.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Personio Developer Hub
+    url: https://developer.personio.de/
+  license:
+    name: Personio Proprietary
+servers:
+- url: https://api.personio.de/v2
+  description: Personio Public API v2 production base URL
+security:
+- bearerAuth: []
+tags:
+- name: Persons
+  description: Manage person (employee) records.
+paths:
+  /persons:
+    get:
+      tags:
+      - Persons
+      summary: List persons
+      description: Returns a paginated list of persons (employees).
+      operationId: listPersons
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 50
+      - in: query
+        name: cursor
+        schema:
+          type: string
+        description: Opaque pagination cursor.
+      responses:
+        '200':
+          description: A page of persons.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonList'
+        '401':
+          description: Missing or invalid access token.
+    post:
+      tags:
+      - Persons
+      summary: Create a person
+      description: 'Creates a new Person resource and an associated Employment resource.
+
+        '
+      operationId: createPerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonCreate'
+      responses:
+        '201':
+          description: Person created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+  /persons/{person_id}:
+    parameters:
+    - in: path
+      name: person_id
+      required: true
+      schema:
+        type: string
+      description: Personio person identifier.
+    patch:
+      tags:
+      - Persons
+      summary: Update a person
+      description: Modifies an existing person record.
+      operationId: patchPerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Person updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '404':
+          description: Person not found.
+components:
+  schemas:
+    PersonCreate:
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        employment:
+          type: object
+          description: Associated employment details.
+          additionalProperties: true
+    PersonList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+        meta:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Bearer access token obtained from POST /v2/auth/token using the
+
+        OAuth 2.0 Client Credentials grant.
+
+        '
+externalDocs:
+  description: Personio Developer Hub
+  url: https://developer.personio.de/

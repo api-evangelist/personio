@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: Personio Public API v2 Absence Periods API
+  description: 'Next-generation Personio Public API for HR management data including
+
+    persons, absence periods, projects, and webhooks. Authenticates via OAuth
+
+    2.0 Client Credentials Grant: exchange a Client ID and Secret at
+
+    POST /v2/auth/token for a short-lived Bearer access token, then include
+
+    it in the Authorization header of subsequent calls.
+
+
+    Only a representative subset of the public v2 surface (persons, absence
+
+    periods, projects, webhooks) is modeled here. See the API reference
+
+    linked under externalDocs for the full catalog.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Personio Developer Hub
+    url: https://developer.personio.de/
+  license:
+    name: Personio Proprietary
+servers:
+- url: https://api.personio.de/v2
+  description: Personio Public API v2 production base URL
+security:
+- bearerAuth: []
+tags:
+- name: Absence Periods
+  description: Manage absence periods.
+paths:
+  /absence-periods:
+    get:
+      tags:
+      - Absence Periods
+      summary: List absence periods
+      description: Returns a paginated, filterable list of absence periods.
+      operationId: listAbsencePeriods
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 50
+      - in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A page of absence periods.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AbsencePeriod'
+    post:
+      tags:
+      - Absence Periods
+      summary: Create an absence period
+      operationId: createAbsencePeriod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AbsencePeriod'
+      responses:
+        '201':
+          description: Absence period created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbsencePeriod'
+components:
+  schemas:
+    AbsencePeriod:
+      type: object
+      properties:
+        id:
+          type: string
+        person_id:
+          type: string
+        absence_type:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Bearer access token obtained from POST /v2/auth/token using the
+
+        OAuth 2.0 Client Credentials grant.
+
+        '
+externalDocs:
+  description: Personio Developer Hub
+  url: https://developer.personio.de/

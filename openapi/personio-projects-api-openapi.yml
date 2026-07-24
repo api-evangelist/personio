@@ -1,0 +1,79 @@
+openapi: 3.1.0
+info:
+  title: Personio Public API v2 Absence Periods Projects API
+  description: 'Next-generation Personio Public API for HR management data including
+
+    persons, absence periods, projects, and webhooks. Authenticates via OAuth
+
+    2.0 Client Credentials Grant: exchange a Client ID and Secret at
+
+    POST /v2/auth/token for a short-lived Bearer access token, then include
+
+    it in the Authorization header of subsequent calls.
+
+
+    Only a representative subset of the public v2 surface (persons, absence
+
+    periods, projects, webhooks) is modeled here. See the API reference
+
+    linked under externalDocs for the full catalog.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Personio Developer Hub
+    url: https://developer.personio.de/
+  license:
+    name: Personio Proprietary
+servers:
+- url: https://api.personio.de/v2
+  description: Personio Public API v2 production base URL
+security:
+- bearerAuth: []
+tags:
+- name: Projects
+  description: Read project definitions.
+paths:
+  /projects:
+    get:
+      tags:
+      - Projects
+      summary: List projects
+      description: Returns the configured projects.
+      operationId: listProjects
+      responses:
+        '200':
+          description: Array of projects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Project'
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        active:
+          type: boolean
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Bearer access token obtained from POST /v2/auth/token using the
+
+        OAuth 2.0 Client Credentials grant.
+
+        '
+externalDocs:
+  description: Personio Developer Hub
+  url: https://developer.personio.de/

@@ -1,0 +1,110 @@
+openapi: 3.1.0
+info:
+  title: Personio Public API v2 Absence Periods Webhooks API
+  description: 'Next-generation Personio Public API for HR management data including
+
+    persons, absence periods, projects, and webhooks. Authenticates via OAuth
+
+    2.0 Client Credentials Grant: exchange a Client ID and Secret at
+
+    POST /v2/auth/token for a short-lived Bearer access token, then include
+
+    it in the Authorization header of subsequent calls.
+
+
+    Only a representative subset of the public v2 surface (persons, absence
+
+    periods, projects, webhooks) is modeled here. See the API reference
+
+    linked under externalDocs for the full catalog.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Personio Developer Hub
+    url: https://developer.personio.de/
+  license:
+    name: Personio Proprietary
+servers:
+- url: https://api.personio.de/v2
+  description: Personio Public API v2 production base URL
+security:
+- bearerAuth: []
+tags:
+- name: Webhooks
+  description: Manage event webhook subscriptions.
+paths:
+  /webhooks:
+    post:
+      tags:
+      - Webhooks
+      summary: Create a webhook subscription
+      description: 'Subscribes a callback URL to receive event payloads for selected
+
+        Person events.
+
+        '
+      operationId: createWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreate'
+      responses:
+        '201':
+          description: Webhook created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+  /webhooks/{webhook_id}:
+    parameters:
+    - in: path
+      name: webhook_id
+      required: true
+      schema:
+        type: string
+    delete:
+      tags:
+      - Webhooks
+      summary: Delete a webhook subscription
+      operationId: deleteWebhook
+      responses:
+        '204':
+          description: Webhook deleted.
+components:
+  schemas:
+    WebhookCreate:
+      type: object
+      required:
+      - url
+      - events
+      properties:
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+    Webhook:
+      allOf:
+      - $ref: '#/components/schemas/WebhookCreate'
+      - type: object
+        properties:
+          id:
+            type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Bearer access token obtained from POST /v2/auth/token using the
+
+        OAuth 2.0 Client Credentials grant.
+
+        '
+externalDocs:
+  description: Personio Developer Hub
+  url: https://developer.personio.de/

@@ -1,0 +1,107 @@
+openapi: 3.1.0
+info:
+  title: Personio Public API v2 Absence Periods Auth API
+  description: 'Next-generation Personio Public API for HR management data including
+
+    persons, absence periods, projects, and webhooks. Authenticates via OAuth
+
+    2.0 Client Credentials Grant: exchange a Client ID and Secret at
+
+    POST /v2/auth/token for a short-lived Bearer access token, then include
+
+    it in the Authorization header of subsequent calls.
+
+
+    Only a representative subset of the public v2 surface (persons, absence
+
+    periods, projects, webhooks) is modeled here. See the API reference
+
+    linked under externalDocs for the full catalog.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Personio Developer Hub
+    url: https://developer.personio.de/
+  license:
+    name: Personio Proprietary
+servers:
+- url: https://api.personio.de/v2
+  description: Personio Public API v2 production base URL
+security:
+- bearerAuth: []
+tags:
+- name: Auth
+  description: OAuth 2.0 token exchange.
+paths:
+  /auth/token:
+    post:
+      tags:
+      - Auth
+      summary: Obtain an OAuth 2.0 access token
+      description: 'Exchange Personio API credentials (Client ID and Client Secret) for a
+
+        short-lived Bearer access token using the OAuth 2.0 Client Credentials
+
+        grant.
+
+        '
+      operationId: createAccessToken
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - grant_type
+              - client_id
+              - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+                client_id:
+                  type: string
+                  description: Personio API client identifier.
+                client_secret:
+                  type: string
+                  description: Personio API client secret.
+                scope:
+                  type: string
+                  description: Space-separated list of requested scopes.
+      responses:
+        '200':
+          description: Access token issued.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  token_type:
+                    type: string
+                    example: Bearer
+                  expires_in:
+                    type: integer
+                  scope:
+                    type: string
+        '401':
+          description: Invalid credentials.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Bearer access token obtained from POST /v2/auth/token using the
+
+        OAuth 2.0 Client Credentials grant.
+
+        '
+externalDocs:
+  description: Personio Developer Hub
+  url: https://developer.personio.de/
