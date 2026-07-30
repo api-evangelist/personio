@@ -11,7 +11,19 @@ description: >-
   OAuth 2.0 client credentials flow), with webhooks now available for Person
   entity events.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/personio.png
 tags:
   - Human Resources
   - HRIS
@@ -26,49 +38,102 @@ created: '2026-05-11'
 modified: '2026-05-11'
 specificationVersion: '0.19'
 apis:
-  - aid: personio:public-api-v1
-    name: Personio Public API v1
-    description: >-
-      REST API for managing employees, attendances, absences, projects, and
-      recruiting data in Personio. Authentication uses a Client ID/Secret
-      exchanged for a short-lived Bearer token via POST /v1/auth.
-    humanURL: https://developer.personio.de/reference/authentication
-    baseURL: https://api.personio.de/v1
-    tags:
-      - HRIS
-      - Employees
-      - Absences
-      - Attendances
-      - Recruiting
-    properties:
-      - type: Documentation
-        url: https://developer.personio.de/
-      - type: Authentication
-        url: https://developer.personio.de/reference/authentication
-      - type: GettingStarted
-        url: >-
-          https://developer.personio.de/docs/getting-started-with-the-personio-api
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/personio/api-docs/master/personio-auth-api.yaml
-  - aid: personio:public-api-v2
-    name: Personio Public API v2
-    description: >-
-      Next-generation REST API with OAuth 2.0 Client Credentials Grant
-      authentication. Token endpoint POST /v2/auth/token returns access
-      tokens used as Bearer credentials on subsequent calls.
-    humanURL: https://developer.personio.de/reference/post_v2-auth-token
-    baseURL: https://api.personio.de/v2
-    tags:
-      - HRIS
-      - OAuth 2.0
-      - Employees
-    properties:
-      - type: Documentation
-        url: https://developer.personio.de/reference/post_v2-auth-token
-      - type: GitHub
-        url: https://github.com/personio/api-docs
-
+- aid: personio:public-api-v2
+  name: Personio Public API v2
+  description: >-
+    Next-generation REST API with OAuth 2.0 Client Credentials Grant authentication. Token endpoint POST
+    /v2/auth/token returns access tokens used as Bearer credentials on subsequent calls.
+  humanURL: https://developer.personio.de/reference/post_v2-auth-token
+  baseURL: https://api.personio.de/v2
+  tags:
+  - HRIS
+  - OAuth 2.0
+  - Employees
+  properties:
+  - type: Documentation
+    url: https://developer.personio.de/reference/post_v2-auth-token
+  - type: GitHub
+    url: https://github.com/personio/api-docs
+- aid: personio:personio-absence-periods-api
+  name: Personio Absence Periods API
+  description: Manage absence periods.
+  humanURL: https://developer.personio.de/reference/authentication
+  baseURL: https://api.personio.de/v1
+  tags:
+  - Absence Periods
+  properties:
+  - type: OpenAPI
+    url: openapi/personio-absence-periods-api-openapi.yml
+  - type: Documentation
+    url: https://developer.personio.de/
+  - type: Authentication
+    url: https://developer.personio.de/reference/authentication
+  - type: GettingStarted
+    url: https://developer.personio.de/docs/getting-started-with-the-personio-api
+- aid: personio:personio-auth-api
+  name: Personio Auth API
+  description: OAuth 2.0 token exchange.
+  humanURL: https://developer.personio.de/reference/authentication
+  baseURL: https://api.personio.de/v1
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/personio-auth-api-openapi.yml
+  - type: Documentation
+    url: https://developer.personio.de/
+  - type: Authentication
+    url: https://developer.personio.de/reference/authentication
+  - type: GettingStarted
+    url: https://developer.personio.de/docs/getting-started-with-the-personio-api
+- aid: personio:personio-persons-api
+  name: Personio Persons API
+  description: Manage person (employee) records.
+  humanURL: https://developer.personio.de/reference/authentication
+  baseURL: https://api.personio.de/v1
+  tags:
+  - Persons
+  properties:
+  - type: OpenAPI
+    url: openapi/personio-persons-api-openapi.yml
+  - type: Documentation
+    url: https://developer.personio.de/
+  - type: Authentication
+    url: https://developer.personio.de/reference/authentication
+  - type: GettingStarted
+    url: https://developer.personio.de/docs/getting-started-with-the-personio-api
+- aid: personio:personio-projects-api
+  name: Personio Projects API
+  description: Read project definitions.
+  humanURL: https://developer.personio.de/reference/authentication
+  baseURL: https://api.personio.de/v1
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/personio-projects-api-openapi.yml
+  - type: Documentation
+    url: https://developer.personio.de/
+  - type: Authentication
+    url: https://developer.personio.de/reference/authentication
+  - type: GettingStarted
+    url: https://developer.personio.de/docs/getting-started-with-the-personio-api
+- aid: personio:personio-webhooks-api
+  name: Personio Webhooks API
+  description: Manage event webhook subscriptions.
+  humanURL: https://developer.personio.de/reference/authentication
+  baseURL: https://api.personio.de/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/personio-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.personio.de/
+  - type: Authentication
+    url: https://developer.personio.de/reference/authentication
+  - type: GettingStarted
+    url: https://developer.personio.de/docs/getting-started-with-the-personio-api
 common:
   - type: AgenticAccess
     url: agentic-access/personio-agentic-access.yml
