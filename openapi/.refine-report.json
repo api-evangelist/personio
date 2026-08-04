@@ -1,0 +1,22 @@
+{
+  "provider": "personio",
+  "sources": [
+    "personio-absence-periods-api-openapi.yml",
+    "personio-auth-api-openapi.yml",
+    "personio-persons-api-openapi.yml",
+    "personio-projects-api-openapi.yml",
+    "personio-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "personio-absence-periods-api-openapi.yml",
+    "personio-auth-api-openapi.yml",
+    "personio-persons-api-openapi.yml",
+    "personio-projects-api-openapi.yml",
+    "personio-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
