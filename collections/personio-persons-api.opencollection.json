@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Personio Public API v2 Absence Periods Persons API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Persons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List persons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.personio.de/v2/persons",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of persons (employees)."
+        },
+        {
+          "info": {
+            "name": "Create a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.personio.de/v2/persons",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Person resource and an associated Employment resource.\n"
+        },
+        {
+          "info": {
+            "name": "Update a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.personio.de/v2/persons/:person_id",
+            "params": [
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "path",
+                "description": "Personio person identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing person record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

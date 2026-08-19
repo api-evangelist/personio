@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Personio Public API v2 Absence Periods API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Absence Periods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List absence periods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.personio.de/v2/absence-periods",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated, filterable list of absence periods."
+        },
+        {
+          "info": {
+            "name": "Create an absence period",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.personio.de/v2/absence-periods",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an absence period"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

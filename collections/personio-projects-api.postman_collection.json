@@ -1,0 +1,119 @@
+{
+  "item": [
+    {
+      "id": "f788f48a-1594-4bc2-a19b-42de98dd8307",
+      "name": "Projects",
+      "description": {
+        "content": "Read project definitions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c75a9f1-e15c-4a31-ac16-c3ad025e18aa",
+          "name": "List projects",
+          "request": {
+            "name": "List projects",
+            "description": {
+              "content": "Returns the configured projects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebe5bc5e-7664-4a71-8314-7eccf0d6c696",
+              "name": "Array of projects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"active\": false\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"active\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.personio.de/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a04a97f3-52ab-4cdf-8a08-2adeea576fa0",
+    "name": "Personio Public API v2 Absence Periods Projects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Next-generation Personio Public API for HR management data including\npersons, absence periods, projects, and webhooks. Authenticates via OAuth\n2.0 Client Credentials Grant: exchange a Client ID and Secret at\nPOST /v2/auth/token for a short-lived Bearer access token, then include\nit in the Authorization header of subsequent calls.\n\nOnly a representative subset of the public v2 surface (persons, absence\nperiods, projects, webhooks) is modeled here. See the API reference\nlinked under externalDocs for the full catalog.\n\n\nContact Support:\n Name: Personio Developer Hub",
+      "type": "text/plain"
+    }
+  }
+}
