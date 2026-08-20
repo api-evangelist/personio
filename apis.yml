@@ -47,6 +47,10 @@ apis:
   baseURL: https://api.personio.de/v2
   tags:
   - HRIS
+  - Authentication
+  - Employees
+  tags_raw:
+  - HRIS
   - OAuth 2.0
   - Employees
   properties:
@@ -76,6 +80,8 @@ apis:
   humanURL: https://developer.personio.de/reference/authentication
   baseURL: https://api.personio.de/v1
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -108,6 +114,8 @@ apis:
   humanURL: https://developer.personio.de/reference/authentication
   baseURL: https://api.personio.de/v1
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -124,6 +132,8 @@ apis:
   humanURL: https://developer.personio.de/reference/authentication
   baseURL: https://api.personio.de/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
