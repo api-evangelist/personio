@@ -1,11 +1,7 @@
 {
   "provider": "personio",
   "sources": [
-    "personio-absence-periods-api-openapi.yml",
-    "personio-auth-api-openapi.yml",
-    "personio-persons-api-openapi.yml",
-    "personio-projects-api-openapi.yml",
-    "personio-webhooks-api-openapi.yml"
+    "_original/personio-openapi.yml"
   ],
   "outputs": [
     "personio-absence-periods-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "personio-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "personio-absence-periods-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "personio-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "personio-persons-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "personio-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "personio-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

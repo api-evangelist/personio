@@ -1,0 +1,1 @@
+{"resource":"https://mcp.app.personio.com/mcp","authorization_servers":["https://mcp.app.personio.com/"],"bearer_methods_supported":["header"],"scopes_supported":["openid","offline_access","mcp:access"]}
