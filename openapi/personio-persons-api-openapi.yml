@@ -97,6 +97,18 @@ paths:
           description: Person not found.
 components:
   schemas:
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
     PersonCreate:
       type: object
       required:
@@ -127,18 +139,6 @@ components:
           properties:
             next_cursor:
               type: string
-    Person:
-      type: object
-      properties:
-        id:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
   securitySchemes:
     bearerAuth:
       type: http
