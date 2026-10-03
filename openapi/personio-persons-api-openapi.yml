@@ -97,6 +97,18 @@ paths:
           description: Person not found.
 components:
   schemas:
+    PersonList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+        meta:
+          type: object
+          properties:
+            next_cursor:
+              type: string
     Person:
       type: object
       properties:
@@ -127,18 +139,6 @@ components:
           type: object
           description: Associated employment details.
           additionalProperties: true
-    PersonList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Person'
-        meta:
-          type: object
-          properties:
-            next_cursor:
-              type: string
   securitySchemes:
     bearerAuth:
       type: http
