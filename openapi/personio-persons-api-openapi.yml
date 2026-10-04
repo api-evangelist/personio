@@ -97,30 +97,6 @@ paths:
           description: Person not found.
 components:
   schemas:
-    PersonList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Person'
-        meta:
-          type: object
-          properties:
-            next_cursor:
-              type: string
-    Person:
-      type: object
-      properties:
-        id:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
     PersonCreate:
       type: object
       required:
@@ -139,6 +115,30 @@ components:
           type: object
           description: Associated employment details.
           additionalProperties: true
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+    PersonList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+        meta:
+          type: object
+          properties:
+            next_cursor:
+              type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -58,6 +58,13 @@ paths:
           description: Webhook deleted.
 components:
   schemas:
+    Webhook:
+      allOf:
+      - $ref: '#/components/schemas/WebhookCreate'
+      - type: object
+        properties:
+          id:
+            type: string
     WebhookCreate:
       type: object
       required:
@@ -70,13 +77,6 @@ components:
         events:
           type: array
           items:
-            type: string
-    Webhook:
-      allOf:
-      - $ref: '#/components/schemas/WebhookCreate'
-      - type: object
-        properties:
-          id:
             type: string
   securitySchemes:
     bearerAuth:
