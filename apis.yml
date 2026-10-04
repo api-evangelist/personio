@@ -162,6 +162,9 @@ apis:
   - type: GettingStarted
     url: https://developer.personio.de/docs/getting-started-with-the-personio-api
 common:
+  - type: CapabilityMap
+    url: capabilities/personio-capability-edges.yml
+    name: Personio Business Capability Map
   - type: AgenticAccess
     url: agentic-access/personio-agentic-access.yml
   - type: TrustCenter
