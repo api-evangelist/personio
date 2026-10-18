@@ -1,10 +1,12 @@
 generated: '2026-10-14'
 method: searched
 checked:
+- google-workspace/integrations/google-workspace-integration-edges.yml
 - greenhouse/integrations/greenhouse-integration-edges.yml
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
 - https://zapier.com/api/v4/apps/
+- microsoft-teams/integrations/microsoft-teams-integration-edges.yml
 source:
 - greenhouse/integrations/greenhouse-integration-edges.yml
 edges:
@@ -75,3 +77,39 @@ edges:
     builder: Fivetran
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
+- partner_name: Google Workspace (own)
+  partner: google-workspace
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://workspace.google.com/marketplace/app/personio_for_google_calendar/662075954923
+  mirror_of: google-workspace/integrations/google-workspace-integration-edges.yml
+  apps:
+  - Personio for Google Calendar™
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Google Workspace app
+- partner_name: Microsoft Teams (own)
+  partner: microsoft-teams
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appsource.microsoft.com/en-us/product/office/WA200003330
+  mirror_of: microsoft-teams/integrations/microsoft-teams-integration-edges.yml
+  apps:
+  - Personio
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Microsoft Teams app
+  publisher_verified:
+  - Microsoft 365 Publisher Attestation
