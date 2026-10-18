@@ -64,7 +64,7 @@
     - connectors/applications/personio
     vendor_link: https://www.personio.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: personio-google-workspace-own
   label: Google Workspace (own)
